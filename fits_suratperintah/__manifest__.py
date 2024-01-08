@@ -18,7 +18,10 @@
     'depends': ['hr'],
 
     'data': [
+        'security/ir.model.access.csv',
+        'data/no_urut_surat.xml',
         'views/surat_perintah_kerja.xml',
+        'report/print_suratjalan.xml',
     ],
     'installable': True,
 }

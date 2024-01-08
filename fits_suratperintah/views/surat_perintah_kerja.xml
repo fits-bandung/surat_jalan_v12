@@ -1,61 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <record id="view_spk_tree" model="ir.ui.view">
-        <field name="name">surat.perintah.kerja.tree</field>
-        <field name="model">surat.perintah.kerja</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="tujuan_kegiatan"/>
-                <field name="tempat"/>
-                <field name="hari_tanggal"/>
-            </tree>
+    <data>
+        <record id="view_surat_perintah_kerja_form" model="ir.ui.view">
+            <field name="name">surat.perintah.kerja.form</field>
+            <field name="model">surat.perintah.kerja</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="tujuan_kegiatan"/>
+                                <field name="tempat"/>
+                                <field name="hari_tanggal"/>
+                                <field name="waktu"/>
+                                <field name="ttd"/>
+                                <field name="tgl_ttd"/>
+                            </group>
+                            <group>
+                                <field name="no_urut_surat"/>
+                                <field name="tahun_surat"/>
+                                <field name="bulan_surat"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Personil">
+                                <field name="spk_user_ids" nolabel="1">
+                                    <tree string="Personil" editable="bottom">
+                                        <field name="employee_id"/>
+                                        <field name="nik"/>
+                                        <field name="jabatan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="view_spk_tree" model="ir.ui.view">
+            <field name="name">surat.perintah.kerja.tree</field>
+            <field name="model">surat.perintah.kerja</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="tujuan_kegiatan"/>
+                    <field name="tempat"/>
+                    <field name="hari_tanggal"/>
+                    <field name="ttd"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="action_spk_list">
+        <field name="name">Surat Perintah Kerja</field>
+        <field name="res_model">surat.perintah.kerja</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Klik "Buat" untuk membuat Surat Perintah Kerja baru.
+            </p>
         </field>
     </record>
 
-    <record id="view_surat_perintah_kerja_form" model="ir.ui.view">
-      <field name="name">surat.perintah.kerja.form</field>
-      <field name="model">surat.perintah.kerja</field>
-      <field name="inherit_id" ref="hr.view_employee_form"/>
-      <field name="arch" type="xml">
-        <form>
-          <sheet>
-            <group>
-              <group>
-                <field name="tujuan_kegiatan"/>
-                <field name="tempat"/>
-                <field name="hari_tanggal"/>
-                <field name="waktu"/>
-              </group>
-              <group>
-                <field name="employee_ids" widget="many2many_tags" options="{'no_create_edit': True}" />
-              </group>
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
-  </data>
-    
-    <!-- Action -->
-    <record model="ir.actions.act_window" id="action_spk_list">
-      <field name="name">Daftar Surat Perintah Kerja</field>
-      <field name="res_model">surat.perintah.kerja</field>
-      <field name="view_type">form</field>
-      <field name="view_mode">tree,form</field>
-      <field name="help" type="html">
-        <p class="oe_view_nocontent_create">
-          Klik "Buat" untuk membuat Surat Perintah Kerja baru.
-        </p>
-      </field>
-    </record>
-
     <!-- Menu Item -->
-    <menuitem id="menu_spk" 
-    name="Surat Perintah Kerja" 
-    action="action_spk_list"
-    parent="hr.menu_human_resources_configuration" 
-    sequence="2" 
+    <menuitem id="menu_spk"
+              name="Surat Perintah Kerja"
+              action="action_spk_list"
+              parent="hr.menu_human_resources_configuration"
+              sequence="10"
     />
 
 </odoo>

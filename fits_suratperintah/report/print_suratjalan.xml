@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report id="surat_perintah_kerja_qweb_report"
+                string="Surat Perintah Kerja"
+                model="surat.perintah.kerja"
+                report_type="qweb-pdf"
+                file="fits_suratperintah.report_daily_qweb"
+                name="fits_suratperintah.report_daily_qweb"/>
+
+
+        <template id="report_daily_qweb">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+
+                            <div style="page-break-inside: avoid;">
+                                <h6 class="text-center" style="text-decoration: underline; font-weight: bold;">
+                                    SURAT TUGAS
+                                </h6>
+                                <p class="text-center">No. 08.<span t-field="o.no_urut_surat"/>/ST.HR/FPP/<span t-field="o.bulan_surat"/>/<span t-field="o.tahun_surat"/></p>
+                                <table width="100%">
+                                    <div>
+                                        Yang bertandatangan di bawah ini atas nama <span style="font-weight: bold;">PT
+                                        Fujicon
+                                        Priangan Perdana</span>, yang beralamat di Jl. Soekarno Hatta No. 590, Metro
+                                        Trade
+                                        Center Blok J-31, Kel Sekejati, Kec Buah Batu, Kota Bandung menugaskan :
+                                    </div>
+                                    <br/>
+                                    <t t-if="len(o.spk_user_ids) > 1">
+                                    <td class="text-center">
+                                        <table width="100%">
+                                            <table class="table table-condensed" style="font-size:12px;" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center"
+                                                            style="width:5%; border: solid 1px #000;">No
+                                                        </th>
+                                                        <th class="text-center"
+                                                            style="width:20%; border: solid 1px #000;">Nama
+                                                        </th>
+                                                        <th class="text-center"
+                                                            style="width:30%; border: solid 1px #000;">NIK
+                                                        </th>
+                                                        <th class="text-center"
+                                                            style="width:25%; border: solid 1px #000;">Jabatan
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="sale_tbody">
+                                                    <t t-foreach="o.spk_user_ids" t-as="l">
+                                                        <tr>
+                                                            <td class="text-center" style="border: solid 1px #000;">
+                                                                <span t-esc="l_index + 1"/>
+                                                            </td>
+                                                            <td class="text-left" style="border: solid 1px #000;">
+                                                                <span t-field="l.employee_id.name"/>
+                                                            </td>
+                                                            <td class="text-left" style="border: solid 1px #000;">
+                                                                <span t-field="l.nik"/>
+                                                            </td>
+                                                            <td class="text-left" style="border: solid 1px #000;">
+                                                                <span t-field="l.jabatan"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </table>
+                                        <div style="margin-top: 10px; margin-bottom: 10px;">
+                                            Untuk melakukan kegiatan kerja pada Tempat, Tanggal, dan Waktu seperti
+                                            berikut :
+                                        </div>
+                                        <table>
+                                            <tr>
+                                                <tr>
+                                                    <td style="padding-left: 7px; padding-top: 2px;">Tujuan Kegiatan
+                                                    </td>
+                                                    <td> : </td>
+                                                    <td>
+                                                        <span t-field="o.tujuan_kegiatan"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 7px; padding-top: 2px;">Tempat</td>
+                                                    <td> : </td>
+                                                    <td>
+                                                        <span t-field="o.tempat"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 7px; padding-top: 2px;">Hari, Tanggal</td>
+                                                    <td> : </td>
+                                                    <td>
+                                                        <span t-field="o.hari_tanggal"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 7px; padding-top: 2px;">Waktu</td>
+                                                    <td> : </td>
+                                                    <td>
+                                                        <span t-field="o.waktu"/>
+                                                    </td>
+                                                </tr>
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                        <div>
+                                            Demikian surat perjalanan dinas ini kami buat untuk dapat menjalankan
+                                            tugas dengan sebaik-baiknya dan penuh tanggung jawab, serta menjaga
+                                            etika dan norma yang berlaku.
+                                        </div>
+                                        <br/>
+                                        <div>
+                                            <table>
+                                                <tr>
+                                                    <td style="font-weight: bold;">PT. Fujicon Priangan Perdana</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span t-field="o.tgl_ttd"/>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-top: 50px;">
+                                                    <td style="padding-top: 70px;">
+                                                        <span t-field="o.ttd.name" style="text-decoration: underline;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span t-field="o.ttd.job_id.name"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    </t>
+                                    <t t-if="len(o.spk_user_ids)== 1" >
+                                    <td class="text-left">
+                                        <table>
+                                            <table>
+                                                <tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px;">Nama</td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.spk_user_ids.employee_id.name"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px; padding-top: 2px;">NIK</td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.spk_user_ids.nik"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px; padding-top: 2px;">
+                                                            Jabatan          
+                                                                    
+                                                        </td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.spk_user_ids.jabatan"/>
+                                                        </td>
+                                                    </tr>
+                                                </tr>
+                                            </table>
+                                            <div style="margin-top: 10px; margin-bottom: 10px;">
+                                                Untuk melakukan kegiatan kerja pada Tempat, Tanggal, dan Waktu seperti
+                                                berikut :
+                                            </div>
+                                            <table>
+                                                <tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px; padding-top: 2px;">Tujuan
+                                                            Kegiatan
+                                                        </td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.tujuan_kegiatan"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px; padding-top: 2px;">Tempat</td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.tempat"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px; padding-top: 2px;">Hari, Tanggal
+                                                        </td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.hari_tanggal"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding-left: 7px; padding-top: 2px;">Waktu</td>
+                                                        <td> : </td>
+                                                        <td>
+                                                            <span t-field="o.waktu"/>
+                                                        </td>
+                                                    </tr>
+                                                </tr>
+                                            </table>
+                                        </table>
+                                        <br/>
+                                        <div>
+                                            Demikian surat perjalanan dinas ini kami buat untuk dapat menjalankan
+                                            tugas dengan sebaik-baiknya dan penuh tanggung jawab, serta menjaga
+                                            etika dan norma yang berlaku.
+                                        </div>
+                                        <br/>
+                                        <div>
+                                            <table>
+                                                <tr>
+                                                    <td style="font-weight: bold;">PT. Fujicon Priangan Perdana</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span t-field="o.tgl_ttd"/>
+                                                    </td>
+                                                </tr>
+                                                <tr style="margin-top: 50px;">
+                                                    <td style="padding-top: 70px;">
+                                                        <span t-field="o.ttd.name" style="text-decoration: underline;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span t-field="o.ttd.job_id.name"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</openerp>

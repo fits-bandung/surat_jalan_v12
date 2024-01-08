@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_surat_perintah_kerja,surat.perintah.kerja,model_surat_perintah_kerja,base.group_user,1,1,1,1
+access_surat_perintah_kerja,surat_perintah_kerja,model_surat_perintah_kerja,,1,1,1,1
+access_spk_user,spk_user,model_spk_user,,1,1,1,1

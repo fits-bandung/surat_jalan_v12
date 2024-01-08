@@ -1,0 +1,20 @@
+.main-image-set a {
+    display: flex; /* for alignment */
+    justify-content: center; /* horizontally align portrait image */
+    align-items: center; /* vertically align landscape image */
+
+
+    /** fixed width, creates a square for our image to live */
+    width: 414px;
+    height: 414px;
+    /* Could be styles with a responsive technique a like aspect ratio prop, but that is outside the scope of here */
+
+    background-color: #eee; /* so you can see the "square", for demo purposes */
+}
+
+.main-image-set img {
+    width: auto; /* to counter any width attributes and allow intrinsic image width */
+    height: auto; /* to counter any height attributes and allow intrinsic height */
+    max-width: 100%; /* scale with the parent element width */
+    max-height: 100%; /* scale with the parent element height */
+}
