@@ -22,6 +22,8 @@ class SuratPerintahKerja(models.Model):
                                        , ('X', 'X'),('XI', 'XI'),('XII', 'XII')
                                     ],string="Bulan Surat", required=True)
     no_urut_surat = fields.Char(string="No Urut Surat", readonly=True, required=True, copy=False, default='New')
+    lampiran_ttd = fields.Binary('Lampiran TTD SPK')
+    filename_ttd = fields.Char('Nama Lampiran TTD SM')
 
     @api.model
     def create(self, vals):
@@ -38,7 +40,7 @@ class SpkUser(models.Model):
 
     surat_perintah_kerja_id = fields.Many2one('surat.perintah.kerja', string='Surat Perintah Kerja')
     employee_id = fields.Many2one('hr.employee', string='Nama')
-    nik = fields.Char(string="NIK")
+    nik = fields.Char(string="NIK", required=True)
     jabatan = fields.Char(related='employee_id.job_id.name', string='Jabatan', store=True, readonly=True)
 
 
